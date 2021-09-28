@@ -6,7 +6,7 @@
 #include <cmath>
 #include <algorithm>
 
-namespace ns_scene
+namespace ns_angle
 {
 #pragma region global
     class Degree;
@@ -92,4 +92,4 @@ namespace ns_scene
     Radian operator*(float value, const Radian &radian);
     Radian operator/(float value, const Radian &radian);
 #pragma endregion
-} // namespace ns_scene
+} // namespace ns_angle

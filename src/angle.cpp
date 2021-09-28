@@ -1,6 +1,6 @@
 #include "angle.h"
 
-namespace ns_scene
+namespace ns_angle
 {
 
 #pragma region global
@@ -237,4 +237,4 @@ namespace ns_scene
     }
 #pragma endregion
 
-} // namespace ns_scene
+} // namespace ns_angle
