@@ -6,7 +6,7 @@ int main(int argc, char *argv[])
     // using functions in namespace ns_scene
     using ns_scene::operator""_Deg;
     using ns_scene::operator""_Rad;
-
+    
     // example for class Degree
     ns_scene::Degree degree(10.0f);
     degree += 5.0_Deg;
