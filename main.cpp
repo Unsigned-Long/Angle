@@ -1,4 +1,4 @@
-#include "angle.hpp"
+#include "angle.h"
 #include <complex>
 
 int main(int argc, char *argv[])
