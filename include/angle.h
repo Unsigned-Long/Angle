@@ -34,6 +34,7 @@ namespace ns_angle
         float _degree;
 
     public:
+        Degree() = default;
         Degree(float degree) : _degree(degree) {}
         operator float() const;
         explicit operator Radian() const;
@@ -70,6 +71,7 @@ namespace ns_angle
         float _radian;
 
     public:
+        Radian() = default;
         Radian(float radian) : _radian(radian) {}
         operator float() const;
         explicit operator Degree() const;
