@@ -122,10 +122,6 @@ namespace ns_angle
     {
         return degree * value;
     }
-    Degree operator/(float value, const Degree &degree)
-    {
-        return Degree(value / degree._degree);
-    }
     Degree &Degree::operator+=(const Degree &degree)
     {
         this->_degree += degree._degree;
@@ -202,10 +198,6 @@ namespace ns_angle
     Radian operator*(float value, const Radian &radian)
     {
         return radian * value;
-    }
-    Radian operator/(float value, const Radian &radian)
-    {
-        return Radian(value / radian._radian);
     }
     Radian &Radian::operator+=(const Radian &radian)
     {

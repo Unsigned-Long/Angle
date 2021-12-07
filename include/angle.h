@@ -91,8 +91,6 @@ namespace ns_angle
 
     Degree operator*(float value, const Degree &degree);
 
-    Degree operator/(float value, const Degree &degree);
-
 #pragma endregion
 
 #pragma region Radian class
@@ -114,6 +112,7 @@ namespace ns_angle
         Radian(float radian) : _radian(radian) {}
 
         operator float() const;
+        
         explicit operator Degree() const;
 
         Degree toDegree() const;
@@ -130,7 +129,7 @@ namespace ns_angle
         Radian &operator-=(const Degree &degree);
         Radian &operator*=(float value);
         Radian &operator/=(float value);
-        
+
         ~Radian() {}
     };
     /**
@@ -140,6 +139,17 @@ namespace ns_angle
 
     Radian operator*(float value, const Radian &radian);
 
-    Radian operator/(float value, const Radian &radian);
+#pragma endregion
+
+#pragma region common angles
+    const Radian R_PI_4 = Radian(M_PI_4);
+    const Radian R_PI_2 = Radian(M_PI_2);
+    const Radian R_PI = Radian(M_PI);
+    const Radian R_2_PI = Radian(2.0 * M_PI);
+
+    const Degree D_45 = Degree(45.0f);
+    const Degree D_90 = Degree(90.0f);
+    const Degree D_180 = Degree(180.0f);
+    const Degree D_360 = Degree(360.0f);
 #pragma endregion
 } // namespace ns_angle
