@@ -50,23 +50,13 @@ namespace ns_angle
         auto dotIter = std::find(second.cbegin(), second.cend(), '.');
         auto tDec = std::distance(dotIter, --second.cend());
         if (dec == 0)
-        {
             for (int i = 0; i != tDec + 1; i++)
-            {
                 second.pop_back();
-            }
-        }
         else if (dec <= tDec)
-        {
             for (int i = 0; i != tDec - dec; i++)
-            {
                 second.pop_back();
-            }
-        }
         else
-        {
             second += std::string(dec - tDec, '0');
-        }
         exp += second;
         return exp;
     }
