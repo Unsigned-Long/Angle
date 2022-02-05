@@ -5,15 +5,23 @@
 using namespace ns_angle::ns_literals;
 
 int main(int argc, char *argv[]) {
-  auto angle = ns_angle::Angle(12.43_deg);
+  auto angle = ns_angle::Angle(78.98_deg);
   std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
             << std::endl;
 
-  angle = ns_angle::Angle(ns_angle::Radian(-3.13));
+  angle = ns_angle::Angle(ns_angle::Radian(0.934));
   std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
             << std::endl;
 
-  angle = ns_angle::Angle(30, 0, 0.0);
+  angle = ns_angle::Angle::make_pangle(12, 13, 14);
+  std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
+            << std::endl;
+
+  angle = ns_angle::Angle::make_nangle(12, 13, 14);
+  std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
+            << std::endl;
+
+  angle = ns_angle::Angle(30, 0.0, 0.0);
   std::cout << "sin(" << angle << ") = " << std::sin(angle) << std::endl;
 
   angle.added(30);
@@ -30,14 +38,16 @@ int main(int argc, char *argv[]) {
 
   /**
    * @brief output
-   *
-   * 12'25'48.0" = 0.217(rad) = 12.430(deg)
-   * -179'-20'-8.8" = -3.130(rad) = -179.336(deg)
-   * sin(30'0'0.0") = 0.5
-   * cos(60'0'0.0") = 0.5
-   * sin(90'0'0.0") = 1
-   * cos(45'0'0.0") = 0.707107
-   * sin(30'0'0.0") = 0.5
+   * 
+   * +78'58'48.0" = 1.378(rad) = 78.980(deg)
+   * +53'30'51.3" = 0.934(rad) = 53.514(deg)
+   * +12'13'14.0" = 0.213(rad) = 12.221(deg)
+   * -12'13'14.0" = -0.213(rad) = -12.221(deg)
+   * sin(+30'0'0.0") = 0.5
+   * cos(+60'0'0.0") = 0.5
+   * sin(+90'0'0.0") = 1
+   * cos(+45'0'0.0") = 0.707107
+   * sin(+30'0'0.0") = 0.5
    */
   return 0;
 }

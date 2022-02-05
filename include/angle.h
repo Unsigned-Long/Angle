@@ -85,13 +85,17 @@ struct Degree {
   long double _deg;
 
   Degree(long double degree) : _deg(degree) {}
+
+  std::string to_string(std::size_t prec = 3) const {
+    return ns_priv::format(this->_deg, prec) + "(deg)";
+  }
 };
 
 /**
  * @brief output the Degree object
  */
 std::ostream& operator<<(std::ostream& os, const Degree& degree) {
-  os << ns_priv::format(degree._deg, 3) << "(deg)";
+  os << degree.to_string();
   return os;
 }
 
@@ -101,14 +105,19 @@ std::ostream& operator<<(std::ostream& os, const Degree& degree) {
 struct Radian {
  public:
   long double _rad;
+
   Radian(long double radian) : _rad(radian) {}
+
+  std::string to_string(std::size_t prec = 3) const {
+    return ns_priv::format(this->_rad, prec) + "(rad)";
+  }
 };
 
 /**
  * @brief output the Radian object
  */
 std::ostream& operator<<(std::ostream& os, const Radian& radian) {
-  os << ns_priv::format(radian._rad, 3) << "(rad)";
+  os << radian.to_string();
   return os;
 }
 
@@ -136,11 +145,34 @@ class Angle {
 
   /**
    * @brief Construct a new Angle object using d'm's"
+   *
+   * @attention positive angle [+30'12'15.0"] equals to Angle(30, 12, 15.0)
+   * @attention negative angle [-14'24'46.0"] equals to Angle(-14, -24, -46.0)
    */
   Angle(int deg, int min = 0, long double sed = 0.0) {
     auto val = deg + ns_priv::trans<ns_priv::min_deg>(min) +
                ns_priv::trans<ns_priv::sed_deg>(sed);
     this->_radVal = ns_priv::degree2Radian(val);
+  }
+
+  /**
+   * @brief Construct a new positive Angle object using d'm's"
+   *
+   * @attention [+30'12'15.0"] equals to make_pangle(30, 12, 15.0)
+   */
+  static Angle make_pangle(int deg, int min = 0, long double sed = 0.0) {
+    return Angle(deg, min, sed);
+  }
+
+  /**
+   * @brief Construct a new negative Angle object using d'm's"
+   *
+   * @attention [-14'24'46.0"] equals to make_nangle(14, 24, 46.0)
+   */
+  static Angle make_nangle(int deg, int min = 0, long double sed = 0.0) {
+    auto angle = Angle(deg, min, sed);
+    angle._radVal *= -1;
+    return angle;
   }
 
   /**
@@ -181,6 +213,13 @@ class Angle {
     this->_radVal += Angle(deg, min, sed).radian()._rad;
     return *this;
   }
+  /**
+   * @brief Self increasing
+   */
+  Angle& added(const Angle& angle) {
+    this->_radVal += angle._radVal;
+    return *this;
+  }
 
   /**
    * @brief retuen increasd object based on self
@@ -206,6 +245,10 @@ class Angle {
     copy.added(deg, min, sed);
     return copy;
   }
+  /**
+   * @brief retuen increasd object based on self
+   */
+  Angle add(const Angle& angle) const { return this->add(angle.radian()); }
 
   /**
    * @brief Self decreasing
@@ -226,6 +269,13 @@ class Angle {
    */
   Angle& subed(int deg, int min = 0, long double sed = 0.0) {
     this->_radVal -= Angle(deg, min, sed).radian()._rad;
+    return *this;
+  }
+  /**
+   * @brief Self decreasing
+   */
+  Angle& subed(const Angle& angle) {
+    this->_radVal -= angle._radVal;
     return *this;
   }
 
@@ -253,16 +303,22 @@ class Angle {
     copy.subed(deg, min, sed);
     return copy;
   }
+  /**
+   * @brief retuen decreasd object based on self
+   */
+  Angle sub(const Angle& angle) const { return this->sub(angle.radian()); }
 
   /**
-   * @brief split the d'm's"
+   * @brief format the angle to d'm's"
    * @return std::tuple<int, int, long double>
    */
-  std::tuple<int, int, long double> split() const {
+  std::string to_string(std::size_t prec = 1) const {
     auto deg = ns_priv::radian2Degree(this->_radVal);
+
     auto [d, _d] = ns_priv::frac(deg);
     auto [m, _m] = ns_priv::frac(ns_priv::trans<ns_priv::deg_min>(_d));
     auto s = ns_priv::trans<ns_priv::min_sed>(_m);
+
     if (std::abs(s - 60.0) < 1E-10)
       s = 0.0, m += 1;
     else if (std::abs(s + 60.0) < 1E-10)
@@ -272,7 +328,18 @@ class Angle {
       m = 0.0, d += 1;
     else if (std::abs(m + 60.0) < 1E-10)
       m = 0.0, d -= 1;
-    return {d, m, s};
+
+    d = std::abs(d);
+    m = std::abs(m);
+    s = std::abs(s);
+
+    std::string str;
+    str += (this->_radVal < 0.0 ? '-' : '+');
+    str += std::to_string(d) + '\'';
+    str += std::to_string(m) + '\'';
+    str += ns_priv::format(s, prec) + '\"';
+
+    return str;
   }
 
  private:
@@ -283,9 +350,7 @@ class Angle {
  * @brief output the angle object
  */
 std::ostream& operator<<(std::ostream& os, const Angle& angle) {
-  auto dms = angle.split();
-  os << std::get<0>(dms) << '\'' << std::get<1>(dms) << '\''
-     << ns_priv::format(std::get<2>(dms)) << '\"';
+  os << angle.to_string();
   return os;
 }
 
