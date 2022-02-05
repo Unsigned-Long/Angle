@@ -3,14 +3,13 @@
         {
             "name": "Linux",
             "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/include/**"
+                "${workspaceFolder}/**"
             ],
             "defines": [],
             "compilerPath": "/usr/bin/gcc",
-            "cStandard": "c11",
+            "cStandard": "gnu17",
             "cppStandard": "c++17",
-            "intelliSenseMode": "linux-clang-x64"
+            "intelliSenseMode": "linux-gcc-x64"
         }
     ],
     "version": 4
