@@ -1,159 +1,171 @@
-# Classes for <kbd>___Degree___</kbd> and <kbd>___Radian___</kbd> angle calculation
+# <kbd>___Angle___</kbd> Calculation
+
 ### Author Info
 <kbd>___Name___</kbd>  csl  
 <kbd>___Email___</kbd> 3079625093@qq.com
+
 ## One. Using Example
 
 ```cpp
-int main(int argc, char *argv[])
-{
-    // using functions in namespace ns_angle
-    using ns_angle::operator""_Deg;
-    using ns_angle::operator""_Rad;
+int main(int argc, char *argv[]) {
+  auto angle = ns_angle::Angle(12.43_deg);
+  std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
+            << std::endl;
 
-    // example for class Degree
-    ns_angle::Degree degree(10.0f);
-    degree += 5.0_Deg;
-    degree += 15.0_Deg;
-    // output : 30[D]
-    std::cout << degree << std::endl;
-    // output : +30,0,0.0
-    std::cout << ns_angle::toAngleStrExp(degree) << std::endl;
-    // output : 0.523599[R]
-    std::cout << static_cast<ns_angle::Radian>(degree) << std::endl;
-    // output : 0.866025
-    std::cout << std::cos(degree) << std::endl;
-    // output : 0.5
-    std::cout << std::sin(degree) << std::endl;
+  angle = ns_angle::Angle(ns_angle::Radian(-3.13));
+  std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
+            << std::endl;
 
-    // example for class Radian
-    ns_angle::Radian radian = 3.14_Rad;
-    radian = static_cast<ns_angle::Radian>(degree);
-    radian *= 2.0;
-    // output : 1.0472[R]
-    std::cout << radian << std::endl;
-    // output : +60,0,0.0
-    std::cout << ns_angle::toAngleStrExp(radian) << std::endl;
-    // output : 60[D]
-    std::cout << static_cast<ns_angle::Degree>(radian) << std::endl;
-    // output : 0.5
-    std::cout << std::cos(radian) << std::endl;
-    // output : 0.866025
-    std::cout << std::sin(radian) << std::endl;
+  angle = ns_angle::Angle(30, 0, 0.0);
+  std::cout << "sin(" << angle << ") = " << std::sin(angle) << std::endl;
 
-    return 0;
+  angle.added(30);
+  std::cout << "cos(" << angle << ") = " << std::cos(angle) << std::endl;
+
+  auto angle2 = angle.add(30);
+  std::cout << "sin(" << angle2 << ") = " << std::sin(angle2) << std::endl;
+
+  angle2.subed(45);
+  std::cout << "cos(" << angle2 << ") = " << std::cos(angle2) << std::endl;
+  
+  auto angle3 = angle2.sub(15);
+  std::cout << "sin(" << angle3 << ") = " << std::sin(angle3) << std::endl;
+
+  /**
+   * @brief output
+   *
+   * 12'25'48.0" = 0.217(rad) = 12.430(deg)
+   * -179'-20'-8.8" = -3.130(rad) = -179.336(deg)
+   * sin(30'0'0.0") = 0.5
+   * cos(60'0'0.0") = 0.5
+   * sin(90'0'0.0") = 1
+   * cos(45'0'0.0") = 0.707107
+   * sin(30'0'0.0") = 0.5
+   */
+  return 0;
 }
 ```
+## <kbd>___Degree___</kbd> class
+just used to create angle object
 
-## Two. Class introduction
-### (1) <kbd>___Degree___</kbd> class
-<kbd>___Degree___</kbd> class is used to calculate angles based on the Degree System. It contains a wealth of operator overloaded functions, including but not limited to <kbd>___+___</kbd> <kbd>___-___</kbd> <kbd>___+=___</kbd> <kbd>___-=___</kbd>. The following is an introduction to some important class member functions.  
++ <kbd>ns_angle::Degree operator""_deg(long double deg)</kbd>
 
-1.1 <kbd>Degree(float degree)</kbd>
++ <kbd>std::ostream& operator<<(std::ostream& os, const Degree& degree)</kbd>
 ```cpp
-// the constructor
-Degree(float degree) : _degree(degree) {}
+/**
+ * @brief output the Degree object
+ */
 ```
-1.2 <kbd>operator float() const</kbd>
+## <kbd>___Radian___</kbd> class
+just used to create angle object
+
++ <kbd>ns_angle::Radian operator""_rad(long double rad)</kbd>
+
++ <kbd>std::ostream& operator<<(std::ostream& os, const Radian& radian)</kbd>
 ```cpp
-// operator overload for type float
-// it's used for type transform like std::sin(Degree())
-operator float() const;
-```
-1.3 <kbd>explicit operator Radian() const</kbd>
-```cpp
-// operator overload for type Radian
-// it's used to transform a Degree object to a Radian object
-explicit operator Radian() const;
-```
-1.4 <kbd>Radian toRadian() const</kbd>
-```cpp
-// it's used in the function explicit operator Radian() const;
-Radian toRadian() const;
-```
-1.5 <kbd>~Degree()</kbd>
-```cpp
-// deconstructor
-~Degree();
-```
-1.6 <kbd>Degree operator+(const Degree &degree) const</kbd>
-```cpp
-// operator overload for "+"
-Degree operator+(const Degree &degree) const;
-```
-1.7 <kbd>Degree operator-(const Degree &degree) const</kbd>
-```cpp
-// operator overload for "-"
-Degree operator-(const Degree &degree) const;
-```
-1.8 <kbd>Degree operator*(float value) const</kbd>
-```cpp
-// operator overload for "*"
-Degree operator*(float value) const;
-```
-1.9 <kbd>Degree operator/(float value) const</kbd>
-```cpp
-// operator overload for "/"
-Degree operator/(float value) const;
-```
-1.10 <kbd>other functions</kbd>
-```cpp
-// other operator overload can be find in the scene header file
-// ...
+/**
+ * @brief output the Radian object
+ */
 ```
 
-### (2) <kbd>___Radian___</kbd> class
-<kbd>___Radian___</kbd> class is used to calculate angles based on the Radian System. It contains a wealth of operator overloaded functions, including but not limited to <kbd>___+___</kbd> <kbd>___-___</kbd> <kbd>___+=___</kbd> <kbd>___-=___</kbd>. The following is an introduction to some important class member functions.  
+## <kbd>___Angle___</kbd> class
+<kbd>___Angle___</kbd> class is used to calculate angles. The following is an introduction to some important class member functions.  
 
-2.1 <kbd>Radian(float radian)</kbd>
++ <kbd>Angle(const ns_angle::Degree& deg)</kbd>
 ```cpp
-// the constructor
-Radian(float radian) : _radian(radian) {}
+  /**
+   * @brief Construct a new Angle object using degree
+   */
 ```
-2.2 <kbd>operator float() const</kbd>
++ <kbd>Angle(const ns_angle::Radian& rad)</kbd>
 ```cpp
-// operator overload for type float
-// it's used for type transform like std::sin(Degree())
-operator float() const;
+  /**
+   * @brief Construct a new Angle object using radian
+   */
 ```
-2.3 <kbd>explicit operator Radian() const</kbd>
++ <kbd>Angle(int deg, int min = 0, long double sed = 0.0)</kbd>
 ```cpp
-// operator overload for type Degree
-// it's used to transform a Radian object to a Degree object
-explicit operator Degree() const;
+  /**
+   * @brief Construct a new Angle object using d'm's"
+   */
 ```
-2.4 <kbd>Radian toDegree() const</kbd>
++ <kbd>Radian radian() const</kbd>
 ```cpp
-// it's used in the function explicit operator Degree() const;
-Radian toDegree() const;
+  /**
+   * @brief get the radian
+   */
 ```
-2.5 <kbd>~Radian()</kbd>
++ <kbd>Degree degree() const</kbd>
 ```cpp
-// deconstructor
-~Radian();
+  /**
+   * @brief get the degree
+   */
 ```
-2.6 <kbd>Radian operator+(const Radian &radian) const</kbd>
++ <kbd>operator long double()</kbd>
 ```cpp
-// operator overload for "+"
-Radian operator+(const Radian &radian) const;
+  /**
+   * @brief used to convert the angle to long double [static_cast]
+   */
 ```
-2.7 <kbd>Radian operator-(const Radian &radian) const</kbd>
+
++ <kbd>Angle& added(const ns_angle::Degree& deg)</kbd>
+
++ <kbd>Angle& added(const ns_angle::Radian& rad)</kbd>
+
++ <kbd>Angle& added(int deg, int min = 0, long double sed = 0.0)</kbd>
 ```cpp
-// operator overload for "-"
-Radian operator-(const Radian &radian) const;
+  /**
+   * @brief Self increasing
+   */
 ```
-2.8 <kbd>Radian operator*(float value) const</kbd>
+
++ <kbd>Angle add(const ns_angle::Degree& deg) const</kbd>
+
++ <kbd>Angle add(const ns_angle::Radian& rad) const</kbd>
+
++ <kbd>Angle add(int deg, int min = 0, long double sed = 0.0) const</kbd>
+
 ```cpp
-// operator overload for "*"
-Radian operator*(float value) const;
+  /**
+   * @brief retuen increasd object based on self
+   */
 ```
-2.9 <kbd>Radian operator/(float value) const</kbd>
+
++ <kbd>Angle& subed(const ns_angle::Degree& deg)</kbd>
+
++ <kbd>Angle& subed(const ns_angle::Radian& rad)</kbd>
+
++ <kbd>Angle& subed(int deg, int min = 0, long double sed = 0.0)</kbd>
+
 ```cpp
-// operator overload for "/"
-Radian operator/(float value) const;
+  /**
+   * @brief Self decreasing
+   */
 ```
-2.10 <kbd>other functions</kbd>
+
++ <kbd>Angle sub(const ns_angle::Degree& deg) const</kbd>
+
++ <kbd>Angle sub(const ns_angle::Radian& rad) const</kbd>
+
++ <kbd>Angle sub(int deg, int min = 0, long double sed = 0.0) const</kbd>
+
 ```cpp
-// other operator overload can be find in the scene header file
-// ...
+  /**
+   * @brief retuen decreasd object based on self
+   */
+```
+
++ <kbd>std::tuple<int, int, long double> split() const</kbd>
+```cpp
+  /**
+   * @brief split the d'm's"
+   * @return std::tuple<int, int, long double>
+   */
+```
+
++ <kbd>std::ostream& operator<<(std::ostream& os, const Angle& angle)</kbd>
+```cpp
+/**
+ * @brief output the angle object
+ */
 ```
