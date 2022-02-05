@@ -1,41 +1,43 @@
-#include "angle.h"
 #include <complex>
 
-int main(int argc, char *argv[])
-{
-    // using functions in namespace ns_angle
-    using ns_angle::operator""_Deg;
-    using ns_angle::operator""_Rad;
+#include "angle.h"
 
-    // example for class Degree
-    ns_angle::Degree degree(10.0f);
-    degree += 5.0_Deg;
-    degree += 15.0_Deg;
-    // output : 30[D]
-    std::cout << degree << std::endl;
-    // output : +30,0,0.0
-    std::cout << ns_angle::toAngleStrExp(degree) << std::endl;
-    // output : 0.523599[R]
-    std::cout << static_cast<ns_angle::Radian>(degree) << std::endl;
-    // output : 0.866025
-    std::cout << std::cos(degree) << std::endl;
-    // output : 0.5
-    std::cout << std::sin(degree) << std::endl;
+using namespace ns_angle::ns_literals;
 
-    // example for class Radian
-    ns_angle::Radian radian = 3.14_Rad;
-    radian = static_cast<ns_angle::Radian>(degree);
-    radian *= 2.0;
-    // output : 1.0472[R]
-    std::cout << radian << std::endl;
-    // output : +60,0,0.0
-    std::cout << ns_angle::toAngleStrExp(radian) << std::endl;
-    // output : 60[D]
-    std::cout << static_cast<ns_angle::Degree>(radian) << std::endl;
-    // output : 0.5
-    std::cout << std::cos(radian) << std::endl;
-    // output : 0.866025
-    std::cout << std::sin(radian) << std::endl;
+int main(int argc, char *argv[]) {
+  auto angle = ns_angle::Angle(12.43_deg);
+  std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
+            << std::endl;
 
-    return 0;
+  angle = ns_angle::Angle(ns_angle::Radian(-3.13));
+  std::cout << angle << " = " << angle.radian() << " = " << angle.degree()
+            << std::endl;
+
+  angle = ns_angle::Angle(30, 0, 0.0);
+  std::cout << "sin(" << angle << ") = " << std::sin(angle) << std::endl;
+
+  angle.added(30);
+  std::cout << "cos(" << angle << ") = " << std::cos(angle) << std::endl;
+
+  auto angle2 = angle.add(30);
+  std::cout << "sin(" << angle2 << ") = " << std::sin(angle2) << std::endl;
+
+  angle2.subed(45);
+  std::cout << "cos(" << angle2 << ") = " << std::cos(angle2) << std::endl;
+
+  auto angle3 = angle2.sub(15);
+  std::cout << "sin(" << angle3 << ") = " << std::sin(angle3) << std::endl;
+
+  /**
+   * @brief output
+   *
+   * 12'25'48.0" = 0.217(rad) = 12.430(deg)
+   * -179'-20'-8.8" = -3.130(rad) = -179.336(deg)
+   * sin(30'0'0.0") = 0.5
+   * cos(60'0'0.0") = 0.5
+   * sin(90'0'0.0") = 1
+   * cos(45'0'0.0") = 0.707107
+   * sin(30'0'0.0") = 0.5
+   */
+  return 0;
 }
