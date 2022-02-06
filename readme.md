@@ -155,22 +155,26 @@ just used to create angle object
    */
 ```
 
-+ <kbd>Angle& added(const ns_angle::Degree& deg)</kbd>
++ <kbd>Angle& add(const ns_angle::Degree& deg)</kbd>
 
-+ <kbd>Angle& added(const ns_angle::Radian& rad)</kbd>
++ <kbd>Angle& add(const ns_angle::Radian& rad)</kbd>
 
-+ <kbd>Angle& added(int deg, int min = 0, long double sed = 0.0)</kbd>
++ <kbd>Angle& add(int deg, int min = 0, long double sed = 0.0)</kbd>
+
++ <kbd>Angle& add(const Angle& angle)</kbd>
 ```cpp
   /**
    * @brief Self increasing
    */
 ```
 
-+ <kbd>Angle add(const ns_angle::Degree& deg) const</kbd>
++ <kbd>Angle added(const ns_angle::Degree& deg) const</kbd>
 
-+ <kbd>Angle add(const ns_angle::Radian& rad) const</kbd>
++ <kbd>Angle added(const ns_angle::Radian& rad) const</kbd>
 
-+ <kbd>Angle add(int deg, int min = 0, long double sed = 0.0) const</kbd>
++ <kbd>Angle added(int deg, int min = 0, long double sed = 0.0) const</kbd>
+
++ <kbd>Angle added(const Angle& angle) const</kbd>
 
 ```cpp
   /**
@@ -178,11 +182,13 @@ just used to create angle object
    */
 ```
 
-+ <kbd>Angle& subed(const ns_angle::Degree& deg)</kbd>
++ <kbd>Angle& sub(const ns_angle::Degree& deg)</kbd>
 
-+ <kbd>Angle& subed(const ns_angle::Radian& rad)</kbd>
++ <kbd>Angle& sub(const ns_angle::Radian& rad)</kbd>
 
-+ <kbd>Angle& subed(int deg, int min = 0, long double sed = 0.0)</kbd>
++ <kbd>Angle& sub(int deg, int min = 0, long double sed = 0.0)</kbd>
+
++ <kbd>Angle& sub(const Angle& angle)</kbd>
 
 ```cpp
   /**
@@ -190,11 +196,13 @@ just used to create angle object
    */
 ```
 
-+ <kbd>Angle sub(const ns_angle::Degree& deg) const</kbd>
++ <kbd>Angle subed(const ns_angle::Degree& deg) const</kbd>
 
-+ <kbd>Angle sub(const ns_angle::Radian& rad) const</kbd>
++ <kbd>Angle subed(const ns_angle::Radian& rad) const</kbd>
 
-+ <kbd>Angle sub(int deg, int min = 0, long double sed = 0.0) const</kbd>
++ <kbd>Angle subed(int deg, int min = 0, long double sed = 0.0) const</kbd>
+
++ <kbd>Angle subed(const Angle& angle) const</kbd>
 
 ```cpp
   /**

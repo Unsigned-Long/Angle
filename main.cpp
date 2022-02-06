@@ -24,16 +24,16 @@ int main(int argc, char *argv[]) {
   angle = ns_angle::Angle(30, 0.0, 0.0);
   std::cout << "sin(" << angle << ") = " << std::sin(angle) << std::endl;
 
-  angle.added(30);
+  angle.add(30);
   std::cout << "cos(" << angle << ") = " << std::cos(angle) << std::endl;
 
-  auto angle2 = angle.add(30);
+  auto angle2 = angle.added(30);
   std::cout << "sin(" << angle2 << ") = " << std::sin(angle2) << std::endl;
 
-  angle2.subed(45);
+  angle2.sub(45);
   std::cout << "cos(" << angle2 << ") = " << std::cos(angle2) << std::endl;
 
-  auto angle3 = angle2.sub(15);
+  auto angle3 = angle2.subed(15);
   std::cout << "sin(" << angle3 << ") = " << std::sin(angle3) << std::endl;
 
   /**
