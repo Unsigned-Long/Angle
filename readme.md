@@ -118,6 +118,24 @@ just used to create angle object
    * @attention [-14'24'46.0"] equals to make_nangle(14, 24, 46.0)
    */
 ```
++ <kbd>static Angle make_rangle(long double radian)</kbd>
+```cpp
+  /**
+   * @brief Construct a new Angle object using radian system
+   *
+   * @param radian the radian value
+   * @attention Angle(Radian(12.45)) equals to make_rangle(12.45)
+   */
+```
++ <kbd>static Angle make_dangle(long double degree)</kbd>
+```cpp
+  /**
+   * @brief Construct a new Angle object using degree system
+   *
+   * @param degree the degree value
+   * @attention Angle(Degree(12.45)) equals to make_dangle(12.45)
+   */
+```
 + <kbd>Radian radian() const</kbd>
 ```cpp
   /**

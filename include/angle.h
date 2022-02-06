@@ -176,6 +176,22 @@ class Angle {
   }
 
   /**
+   * @brief Construct a new Angle object using radian system
+   *
+   * @param radian the radian value
+   * @attention Angle(Radian(12.45)) equals to make_rangle(12.45)
+   */
+  static Angle make_rangle(long double radian) { return Angle(Radian(radian)); }
+
+  /**
+   * @brief Construct a new Angle object using degree system
+   *
+   * @param degree the degree value
+   * @attention Angle(Degree(12.45)) equals to make_dangle(12.45)
+   */
+  static Angle make_dangle(long double degree) { return Angle(Degree(degree)); }
+
+  /**
    * @brief get the radian
    */
   inline Radian radian() const { return Radian(this->_radVal); }
