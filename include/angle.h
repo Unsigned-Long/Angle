@@ -77,6 +77,8 @@ std::string format(long double val, std::size_t prec = 1) {
 
 namespace ns_angle {
 
+class Angle;
+
 /**
  * @brief the degree angle system
  */
@@ -86,8 +88,11 @@ struct Degree {
 
   Degree(long double degree) : _deg(degree) {}
 
+  inline operator long double() { return ns_priv::degree2Radian(this->_deg); }
+
   std::string to_string(std::size_t prec = 3) const {
-    return ns_priv::format(this->_deg, prec) + "(deg)";
+    return (this->_deg < 0.0 ? '-' : '+') +
+           ns_priv::format(std::abs(this->_deg), prec) + "(deg)";
   }
 };
 
@@ -108,8 +113,11 @@ struct Radian {
 
   Radian(long double radian) : _rad(radian) {}
 
+  inline operator long double() { return this->_rad; }
+
   std::string to_string(std::size_t prec = 3) const {
-    return ns_priv::format(this->_rad, prec) + "(rad)";
+    return (this->_rad < 0.0 ? '-' : '+') +
+           ns_priv::format(std::abs(this->_rad), prec) + "(rad)";
   }
 };
 
