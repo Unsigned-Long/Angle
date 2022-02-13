@@ -1,8 +1,21 @@
-# <kbd>___Angle___</kbd> Calculation
+# ___Angle___ Calculation
 
-### Author Info
-<kbd>___Name___</kbd>  csl  
-<kbd>___Email___</kbd> 3079625093@qq.com
+[TOC]
+
+## Zero. Author Info
+
+___Name___  csl  
+___Email___ 3079625093@qq.com
+
+```cpp
+                              _|            
+  _|_|_|  _|_|_|      _|_|_|  _|    _|_|    
+_|    _|  _|    _|  _|    _|  _|  _|_|_|_|  
+_|    _|  _|    _|  _|    _|  _|  _|        
+  _|_|_|  _|    _|    _|_|_|  _|    _|_|_|  
+                          _|                
+                      _|_|                 
+```
 
 ## One. Using Example
 
@@ -55,45 +68,52 @@ int main(int argc, char *argv[]) {
   return 0;
 }
 ```
-## <kbd>___Degree___</kbd> class
+## Two. Main Classes
+
+### ___Degree___ class
+
+
+
 just used to create angle object
 
-+ <kbd>ns_angle::Degree operator""_deg(long double deg)</kbd>
++ ___ns_angle::Degree operator""_deg(long double deg)___
 
-+ <kbd>std::ostream& operator<<(std::ostream& os, const Degree& degree)</kbd>
++ ___std::ostream& operator<<(std::ostream& os, const Degree& degree)___
 ```cpp
 /**
  * @brief output the Degree object
  */
 ```
-## <kbd>___Radian___</kbd> class
+### ___Radian___ class
+
 just used to create angle object
 
-+ <kbd>ns_angle::Radian operator""_rad(long double rad)</kbd>
++ ___ns_angle::Radian operator""_rad(long double rad)___
 
-+ <kbd>std::ostream& operator<<(std::ostream& os, const Radian& radian)</kbd>
++ ___std::ostream& operator<<(std::ostream& os, const Radian& radian)___
 ```cpp
 /**
  * @brief output the Radian object
  */
 ```
 
-## <kbd>___Angle___</kbd> class
-<kbd>___Angle___</kbd> class is used to calculate angles. The following is an introduction to some important class member functions.  
+### ___Angle___ class
 
-+ <kbd>Angle(const ns_angle::Degree& deg)</kbd>
+___Angle___ class is used to calculate angles. The following is an introduction to some important class member functions.  
+
++ ___Angle(const ns_angle::Degree& deg)___
 ```cpp
   /**
    * @brief Construct a new Angle object using degree
    */
 ```
-+ <kbd>Angle(const ns_angle::Radian& rad)</kbd>
++ ___Angle(const ns_angle::Radian& rad)___
 ```cpp
   /**
    * @brief Construct a new Angle object using radian
    */
 ```
-+ <kbd>Angle(int deg, int min = 0, long double sed = 0.0)</kbd>
++ ___Angle(int deg, int min = 0, long double sed = 0.0)___
 ```cpp
   /**
    * @brief Construct a new Angle object using d'm's"
@@ -102,7 +122,7 @@ just used to create angle object
    * @attention negative angle [-14'24'46.0"] equals to Angle(-14, -24, -46.0)
    */
 ```
-+ <kbd>static Angle make_pangle(int deg, int min = 0, long double sed = 0.0)</kbd>
++ ___static Angle make_pangle(int deg, int min = 0, long double sed = 0.0)___
 ```cpp
   /**
    * @brief Construct a new positive Angle object using d'm's"
@@ -110,7 +130,7 @@ just used to create angle object
    * @attention [+30'12'15.0"] equals to make_pangle(30, 12, 15.0)
    */
 ```
-+ <kbd>static Angle make_nangle(int deg, int min = 0, long double sed = 0.0)</kbd>
++ ___static Angle make_nangle(int deg, int min = 0, long double sed = 0.0)___
 ```cpp
   /**
    * @brief Construct a new negative Angle object using d'm's"
@@ -118,7 +138,7 @@ just used to create angle object
    * @attention [-14'24'46.0"] equals to make_nangle(14, 24, 46.0)
    */
 ```
-+ <kbd>static Angle make_rangle(long double radian)</kbd>
++ ___static Angle make_rangle(long double radian)___
 ```cpp
   /**
    * @brief Construct a new Angle object using radian system
@@ -127,7 +147,7 @@ just used to create angle object
    * @attention Angle(Radian(12.45)) equals to make_rangle(12.45)
    */
 ```
-+ <kbd>static Angle make_dangle(long double degree)</kbd>
++ ___static Angle make_dangle(long double degree)___
 ```cpp
   /**
    * @brief Construct a new Angle object using degree system
@@ -136,45 +156,45 @@ just used to create angle object
    * @attention Angle(Degree(12.45)) equals to make_dangle(12.45)
    */
 ```
-+ <kbd>Radian radian() const</kbd>
++ ___Radian radian() const___
 ```cpp
   /**
    * @brief get the radian
    */
 ```
-+ <kbd>Degree degree() const</kbd>
++ ___Degree degree() const___
 ```cpp
   /**
    * @brief get the degree
    */
 ```
-+ <kbd>operator long double()</kbd>
++ ___operator long double()___
 ```cpp
   /**
    * @brief used to convert the angle to long double [static_cast]
    */
 ```
 
-+ <kbd>Angle& add(const ns_angle::Degree& deg)</kbd>
++ ___Angle& add(const ns_angle::Degree& deg)___
 
-+ <kbd>Angle& add(const ns_angle::Radian& rad)</kbd>
++ ___Angle& add(const ns_angle::Radian& rad)___
 
-+ <kbd>Angle& add(int deg, int min = 0, long double sed = 0.0)</kbd>
++ ___Angle& add(int deg, int min = 0, long double sed = 0.0)___
 
-+ <kbd>Angle& add(const Angle& angle)</kbd>
++ ___Angle& add(const Angle& angle)___
 ```cpp
   /**
    * @brief Self increasing
    */
 ```
 
-+ <kbd>Angle added(const ns_angle::Degree& deg) const</kbd>
++ ___Angle added(const ns_angle::Degree& deg) const___
 
-+ <kbd>Angle added(const ns_angle::Radian& rad) const</kbd>
++ ___Angle added(const ns_angle::Radian& rad) const___
 
-+ <kbd>Angle added(int deg, int min = 0, long double sed = 0.0) const</kbd>
++ ___Angle added(int deg, int min = 0, long double sed = 0.0) const___
 
-+ <kbd>Angle added(const Angle& angle) const</kbd>
++ ___Angle added(const Angle& angle) const___
 
 ```cpp
   /**
@@ -182,13 +202,13 @@ just used to create angle object
    */
 ```
 
-+ <kbd>Angle& sub(const ns_angle::Degree& deg)</kbd>
++ ___Angle& sub(const ns_angle::Degree& deg)___
 
-+ <kbd>Angle& sub(const ns_angle::Radian& rad)</kbd>
++ ___Angle& sub(const ns_angle::Radian& rad)___
 
-+ <kbd>Angle& sub(int deg, int min = 0, long double sed = 0.0)</kbd>
++ ___Angle& sub(int deg, int min = 0, long double sed = 0.0)___
 
-+ <kbd>Angle& sub(const Angle& angle)</kbd>
++ ___Angle& sub(const Angle& angle)___
 
 ```cpp
   /**
@@ -196,13 +216,13 @@ just used to create angle object
    */
 ```
 
-+ <kbd>Angle subed(const ns_angle::Degree& deg) const</kbd>
++ ___Angle subed(const ns_angle::Degree& deg) const___
 
-+ <kbd>Angle subed(const ns_angle::Radian& rad) const</kbd>
++ ___Angle subed(const ns_angle::Radian& rad) const___
 
-+ <kbd>Angle subed(int deg, int min = 0, long double sed = 0.0) const</kbd>
++ ___Angle subed(int deg, int min = 0, long double sed = 0.0) const___
 
-+ <kbd>Angle subed(const Angle& angle) const</kbd>
++ ___Angle subed(const Angle& angle) const___
 
 ```cpp
   /**
@@ -210,15 +230,15 @@ just used to create angle object
    */
 ```
 
-+ <kbd>std::tuple<int, int, long double> split() const</kbd>
++ ___inline std::string to_string(std::size_t prec = 1) const___
 ```cpp
-  /**
-   * @brief split the d'm's"
-   * @return std::tuple<int, int, long double>
+   /**
+   * @brief format the angle to d'm's"
+   * @return std::string
    */
 ```
 
-+ <kbd>std::ostream& operator<<(std::ostream& os, const Angle& angle)</kbd>
++ ___std::ostream& operator<<(std::ostream& os, const Angle& angle)___
 ```cpp
 /**
  * @brief output the angle object

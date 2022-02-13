@@ -219,28 +219,28 @@ class Angle {
   /**
    * @brief Self increasing
    */
-  Angle& add(const ns_angle::Degree& deg) {
+  inline Angle& add(const ns_angle::Degree& deg) {
     this->_radVal += ns_priv::degree2Radian(deg._deg);
     return *this;
   }
   /**
    * @brief Self increasing
    */
-  Angle& add(const ns_angle::Radian& rad) {
+  inline Angle& add(const ns_angle::Radian& rad) {
     this->_radVal += rad._rad;
     return *this;
   }
   /**
    * @brief Self increasing
    */
-  Angle& add(int deg, int min = 0, long double sed = 0.0) {
+  inline Angle& add(int deg, int min = 0, long double sed = 0.0) {
     this->_radVal += Angle(deg, min, sed).radian()._rad;
     return *this;
   }
   /**
    * @brief Self increasing
    */
-  Angle& add(const Angle& angle) {
+  inline Angle& add(const Angle& angle) {
     this->_radVal += angle._radVal;
     return *this;
   }
@@ -248,7 +248,7 @@ class Angle {
   /**
    * @brief retuen increasd object based on self
    */
-  Angle added(const ns_angle::Degree& deg) const {
+  inline Angle added(const ns_angle::Degree& deg) const {
     auto copy = *this;
     copy.add(deg);
     return copy;
@@ -256,7 +256,7 @@ class Angle {
   /**
    * @brief retuen increasd object based on self
    */
-  Angle added(const ns_angle::Radian& rad) const {
+  inline Angle added(const ns_angle::Radian& rad) const {
     auto copy = *this;
     copy.add(rad);
     return copy;
@@ -264,7 +264,7 @@ class Angle {
   /**
    * @brief retuen increasd object based on self
    */
-  Angle added(int deg, int min = 0, long double sed = 0.0) const {
+  inline Angle added(int deg, int min = 0, long double sed = 0.0) const {
     auto copy = *this;
     copy.add(deg, min, sed);
     return copy;
@@ -272,33 +272,35 @@ class Angle {
   /**
    * @brief retuen increasd object based on self
    */
-  Angle added(const Angle& angle) const { return this->added(angle.radian()); }
+  inline Angle added(const Angle& angle) const {
+    return this->added(angle.radian());
+  }
 
   /**
    * @brief Self decreasing
    */
-  Angle& sub(const ns_angle::Degree& deg) {
+  inline Angle& sub(const ns_angle::Degree& deg) {
     this->_radVal -= ns_priv::degree2Radian(deg._deg);
     return *this;
   }
   /**
    * @brief Self decreasing
    */
-  Angle& sub(const ns_angle::Radian& rad) {
+  inline Angle& sub(const ns_angle::Radian& rad) {
     this->_radVal -= rad._rad;
     return *this;
   }
   /**
    * @brief Self decreasing
    */
-  Angle& sub(int deg, int min = 0, long double sed = 0.0) {
+  inline Angle& sub(int deg, int min = 0, long double sed = 0.0) {
     this->_radVal -= Angle(deg, min, sed).radian()._rad;
     return *this;
   }
   /**
    * @brief Self decreasing
    */
-  Angle& sub(const Angle& angle) {
+  inline Angle& sub(const Angle& angle) {
     this->_radVal -= angle._radVal;
     return *this;
   }
@@ -306,7 +308,7 @@ class Angle {
   /**
    * @brief retuen decreasd object based on self
    */
-  Angle subed(const ns_angle::Degree& deg) const {
+  inline Angle subed(const ns_angle::Degree& deg) const {
     auto copy = *this;
     copy.sub(deg);
     return copy;
@@ -314,7 +316,7 @@ class Angle {
   /**
    * @brief retuen decreasd object based on self
    */
-  Angle subed(const ns_angle::Radian& rad) const {
+  inline Angle subed(const ns_angle::Radian& rad) const {
     auto copy = *this;
     copy.sub(rad);
     return copy;
@@ -322,7 +324,7 @@ class Angle {
   /**
    * @brief retuen decreasd object based on self
    */
-  Angle subed(int deg, int min = 0, long double sed = 0.0) const {
+  inline Angle subed(int deg, int min = 0, long double sed = 0.0) const {
     auto copy = *this;
     copy.sub(deg, min, sed);
     return copy;
@@ -330,13 +332,15 @@ class Angle {
   /**
    * @brief retuen decreasd object based on self
    */
-  Angle subed(const Angle& angle) const { return this->subed(angle.radian()); }
+  inline Angle subed(const Angle& angle) const {
+    return this->subed(angle.radian());
+  }
 
   /**
    * @brief format the angle to d'm's"
-   * @return std::tuple<int, int, long double>
+   * @return std::string
    */
-  std::string to_string(std::size_t prec = 1) const {
+  inline std::string to_string(std::size_t prec = 1) const {
     auto deg = ns_priv::radian2Degree(this->_radVal);
 
     auto [d, _d] = ns_priv::frac(deg);

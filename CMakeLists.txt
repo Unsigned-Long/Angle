@@ -15,4 +15,4 @@ add_executable(${CMAKE_PROJECT_NAME} ./main.cpp)
 
 set(CMAKE_INSTALL_PREFIX /usr/local/)
 
-install(FILES ./include/angle.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/artwork/angle)
+install(FILES ${CMAKE_SOURCE_DIR}/include/angle.h DESTINATION ${CMAKE_INSTALL_PREFIX}/include/artwork/angle)
