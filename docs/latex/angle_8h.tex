@@ -1,0 +1,75 @@
+\hypertarget{angle_8h}{}\doxysection{/home/csl/\+Study\+C\+P\+P/artwork/angle/include/angle.h File Reference}
+\label{angle_8h}\index{/home/csl/StudyCPP/artwork/angle/include/angle.h@{/home/csl/StudyCPP/artwork/angle/include/angle.h}}
+{\ttfamily \#include $<$cmath$>$}\newline
+{\ttfamily \#include $<$iomanip$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$ratio$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$tuple$>$}\newline
+Include dependency graph for angle.\+h\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{angle_8h__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structns__angle_1_1_degree}{ns\+\_\+angle\+::\+Degree}}
+\begin{DoxyCompactList}\small\item\em the degree angle system \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structns__angle_1_1_radian}{ns\+\_\+angle\+::\+Radian}}
+\begin{DoxyCompactList}\small\item\em the radian angle system \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classns__angle_1_1_angle}{ns\+\_\+angle\+::\+Angle}}
+\begin{DoxyCompactList}\small\item\em the angle system \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+ \mbox{\hyperlink{namespacens__angle}{ns\+\_\+angle}}
+\item 
+ \mbox{\hyperlink{namespacens__angle_1_1ns__priv}{ns\+\_\+angle\+::ns\+\_\+priv}}
+\item 
+ \mbox{\hyperlink{namespacens__angle_1_1ns__literals}{ns\+\_\+angle\+::ns\+\_\+literals}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a28299bc8f09e88cb5e42dfd304e42c32}{ns\+\_\+angle\+::ns\+\_\+priv\+::deg\+\_\+min}} = std\+::ratio$<$ 1, 60 $>$
+\begin{DoxyCompactList}\small\item\em used to convert the specified angular units \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a5f02afab7e8b333e9de7bff115f42f44}{ns\+\_\+angle\+::ns\+\_\+priv\+::min\+\_\+sed}} = std\+::ratio$<$ 1, 60 $>$
+\item 
+using \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a34eb5aba7d270c24b3b084ddd86d4f52}{ns\+\_\+angle\+::ns\+\_\+priv\+::deg\+\_\+sed}} = std\+::ratio$<$ 1, 3600 $>$
+\item 
+using \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a36c297331a5a24ebba22c76ea5392c99}{ns\+\_\+angle\+::ns\+\_\+priv\+::min\+\_\+deg}} = std\+::ratio$<$ 60, 1 $>$
+\item 
+using \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a1ac46744e6f5a10b0c3c7b1562bab056}{ns\+\_\+angle\+::ns\+\_\+priv\+::sed\+\_\+min}} = std\+::ratio$<$ 60, 1 $>$
+\item 
+using \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a33518bfadcd5acb507b010fec6428a30}{ns\+\_\+angle\+::ns\+\_\+priv\+::sed\+\_\+deg}} = std\+::ratio$<$ 3600, 1 $>$
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespacens__angle_1_1ns__priv_a896dbfe54b925620c3e4c588f9db1873}{ns\+\_\+angle\+::ns\+\_\+priv\+::format}} (long double val, std\+::size\+\_\+t prec=1)
+\begin{DoxyCompactList}\small\item\em format a value \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacens__angle_ae0baa532e84555d7b1dc2fb1bbfb5beb}{ns\+\_\+angle\+::operator$<$$<$}} (std\+::ostream \&os, const Degree \&degree)
+\begin{DoxyCompactList}\small\item\em output the \mbox{\hyperlink{structns__angle_1_1_degree}{Degree}} object \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacens__angle_aa5f2e5759f25d241bf562ec3598d14ee}{ns\+\_\+angle\+::operator$<$$<$}} (std\+::ostream \&os, const Radian \&radian)
+\begin{DoxyCompactList}\small\item\em output the \mbox{\hyperlink{structns__angle_1_1_radian}{Radian}} object \end{DoxyCompactList}\item 
+std\+::ostream \& \mbox{\hyperlink{namespacens__angle_a2e5d559e8f345522dad3d8894cee6c1b}{ns\+\_\+angle\+::operator$<$$<$}} (std\+::ostream \&os, const Angle \&angle)
+\begin{DoxyCompactList}\small\item\em output the angle object \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyAuthor}{Author}
+csl (\href{mailto:3079625093@qq.com}{\texttt{ 3079625093@qq.\+com}}) 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+0.\+1 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+2022-\/02-\/05
+\end{DoxyDate}
+\begin{DoxyCopyright}{Copyright}
+Copyright (c) 2022 
+\end{DoxyCopyright}
