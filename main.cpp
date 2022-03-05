@@ -1,5 +1,3 @@
-#include <complex>
-
 #include "angle.h"
 
 using namespace ns_angle::ns_literals;
