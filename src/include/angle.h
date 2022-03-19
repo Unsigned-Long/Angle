@@ -89,7 +89,7 @@ namespace ns_angle {
   /**
    * @brief output the Degree object
    */
-  std::ostream &operator<<(std::ostream &os, const Degree &degree) {
+  static std::ostream &operator<<(std::ostream &os, const Degree &degree) {
     os << degree.to_string();
     return os;
   }
@@ -116,7 +116,7 @@ namespace ns_angle {
   /**
    * @brief output the Radian object
    */
-  std::ostream &operator<<(std::ostream &os, const Radian &radian) {
+  static std::ostream &operator<<(std::ostream &os, const Radian &radian) {
     os << radian.to_string();
     return os;
   }
@@ -124,9 +124,9 @@ namespace ns_angle {
   /**
    * @brief the angle system
    */
+  class Angle;
+
   class Angle {
-  public:
-    friend std::ostream &operator<<(std::ostream &os, const Angle &angle);
 
   private:
     long double _radVal;
@@ -369,7 +369,7 @@ namespace ns_angle {
   /**
    * @brief output the angle object
    */
-  std::ostream &operator<<(std::ostream &os, const Angle &angle) {
+  static std::ostream &operator<<(std::ostream &os, const Angle &angle) {
     os << angle.to_string();
     return os;
   }
