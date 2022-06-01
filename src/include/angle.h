@@ -74,13 +74,13 @@ namespace ns_angle {
   public:
     long double _deg;
 
-    Degree(long double degree) : _deg(degree) {}
+    explicit Degree(long double degree) : _deg(degree) {}
 
-    inline operator long double() { return ns_priv::degree2Radian(this->_deg); }
+    inline operator long double() const { return ns_priv::degree2Radian(this->_deg); }
 
-    std::string to_string(std::size_t prec = 3) const {
+    [[nodiscard]] std::string to_string(int precision = 3) const {
       std::stringstream stream;
-      stream << std::fixed << std::setprecision(prec);
+      stream << std::fixed << std::setprecision(precision);
       stream << (this->_deg < 0.0 ? '-' : '+') << std::abs(this->_deg) << "(deg)";
       return stream.str();
     }
@@ -101,13 +101,13 @@ namespace ns_angle {
   public:
     long double _rad;
 
-    Radian(long double radian) : _rad(radian) {}
+    explicit Radian(long double radian) : _rad(radian) {}
 
-    inline operator long double() { return this->_rad; }
+    inline operator long double() const { return this->_rad; }
 
-    std::string to_string(std::size_t prec = 3) const {
+    [[nodiscard]] std::string to_string(int precision = 3) const {
       std::stringstream stream;
-      stream << std::fixed << std::setprecision(prec);
+      stream << std::fixed << std::setprecision(precision);
       stream << (this->_rad < 0.0 ? '-' : '+') << std::abs(this->_rad) << "(rad)";
       return stream.str();
     }
@@ -135,26 +135,28 @@ namespace ns_angle {
     /**
      * @brief Construct a new Angle object using degree
      */
-    Angle(const ns_angle::Degree &deg)
+    explicit Angle(const ns_angle::Degree &deg)
         : _radVal(ns_priv::degree2Radian(deg._deg)) {}
 
     /**
      * @brief Construct a new Angle object using radian
      */
-    Angle(const ns_angle::Radian &rad) : _radVal(rad._rad) {}
+    explicit Angle(const ns_angle::Radian &rad) : _radVal(rad._rad) {}
 
+  protected:
     /**
      * @brief Construct a new Angle object using d'm's"
      *
      * @attention positive angle [+30'12'15.0"] equals to Angle(30, 12, 15.0)
      * @attention negative angle [-14'24'46.0"] equals to Angle(-14, -24, -46.0)
      */
-    Angle(int deg, int min = 0, long double sed = 0.0) {
+    explicit Angle(int deg, int min = 0, long double sed = 0.0) {
       auto val = deg + ns_priv::trans<ns_priv::min_deg>(min) +
                  ns_priv::trans<ns_priv::sed_deg>(sed);
       this->_radVal = ns_priv::degree2Radian(val);
     }
 
+  public:
     /**
      * @brief Construct a new positive Angle object using d'm's"
      *
@@ -194,20 +196,49 @@ namespace ns_angle {
     /**
      * @brief get the radian
      */
-    inline Radian radian() const { return Radian(this->_radVal); }
+    [[nodiscard]] inline Radian radian() const {
+      return Radian(this->_radVal);
+    }
 
     /**
      * @brief get the degree
      */
-    inline Degree degree() const {
+    [[nodiscard]] inline Degree degree() const {
       return Degree(ns_priv::radian2Degree(this->_radVal));
     }
 
     /**
      * @brief used to convert the angle to long double [static_cast]
      */
-    inline operator long double() { return this->_radVal; }
+    inline operator long double() const { return this->_radVal; }
 
+  public:
+    /**
+     * @brief Self increasing
+     */
+    inline Angle &operator+=(const ns_angle::Degree &deg) {
+      return this->add(deg);
+    }
+    inline Angle &operator+=(const ns_angle::Radian &rad) {
+      return this->add(rad);
+    }
+    inline Angle &operator+=(const Angle &angle) {
+      return this->add(angle);
+    }
+    /**
+     * @brief return increased object based on self
+     */
+    inline Angle operator+(const ns_angle::Degree &deg) const {
+      return this->added(deg);
+    }
+    inline Angle operator+(const ns_angle::Radian &rad) const {
+      return this->added(rad);
+    }
+    inline Angle operator+(const Angle &angle) const {
+      return this->added(angle);
+    }
+
+  protected:
     /**
      * @brief Self increasing
      */
@@ -225,49 +256,61 @@ namespace ns_angle {
     /**
      * @brief Self increasing
      */
-    inline Angle &add(int deg, int min = 0, long double sed = 0.0) {
-      this->_radVal += Angle(deg, min, sed).radian()._rad;
-      return *this;
-    }
-    /**
-     * @brief Self increasing
-     */
     inline Angle &add(const Angle &angle) {
       this->_radVal += angle._radVal;
       return *this;
     }
 
     /**
-     * @brief retuen increasd object based on self
+     * @brief return increased object based on self
      */
-    inline Angle added(const ns_angle::Degree &deg) const {
+    [[nodiscard]] inline Angle added(const ns_angle::Degree &deg) const {
       auto copy = *this;
       copy.add(deg);
       return copy;
     }
     /**
-     * @brief retuen increasd object based on self
+     * @brief return increased object based on self
      */
-    inline Angle added(const ns_angle::Radian &rad) const {
+    [[nodiscard]] inline Angle added(const ns_angle::Radian &rad) const {
       auto copy = *this;
       copy.add(rad);
       return copy;
     }
     /**
-     * @brief retuen increasd object based on self
+     * @brief return increased object based on self
      */
-    inline Angle added(int deg, int min = 0, long double sed = 0.0) const {
-      auto copy = *this;
-      copy.add(deg, min, sed);
-      return copy;
-    }
-    /**
-     * @brief retuen increasd object based on self
-     */
-    inline Angle added(const Angle &angle) const {
+    [[nodiscard]] inline Angle added(const Angle &angle) const {
       return this->added(angle.radian());
     }
 
+  public:
+    /**
+     * @brief Self decreasing
+     */
+    inline Angle &operator-=(const ns_angle::Degree &deg) {
+      return this->sub(deg);
+    }
+    inline Angle &operator-=(const ns_angle::Radian &rad) {
+      return this->sub(rad);
+    }
+    inline Angle &operator-=(const Angle &angle) {
+      return this->sub(angle);
+    }
+    /**
+     * @brief return decreased object based on self
+     */
+    inline Angle operator-(const ns_angle::Degree &deg) const {
+      return this->subed(deg);
+    }
+    inline Angle operator-(const ns_angle::Radian &rad) const {
+      return this->subed(rad);
+    }
+    inline Angle operator-(const Angle &angle) const {
+      return this->subed(angle);
+    }
+
+  protected:
     /**
      * @brief Self decreasing
      */
@@ -285,54 +328,74 @@ namespace ns_angle {
     /**
      * @brief Self decreasing
      */
-    inline Angle &sub(int deg, int min = 0, long double sed = 0.0) {
-      this->_radVal -= Angle(deg, min, sed).radian()._rad;
-      return *this;
-    }
-    /**
-     * @brief Self decreasing
-     */
     inline Angle &sub(const Angle &angle) {
       this->_radVal -= angle._radVal;
       return *this;
     }
 
     /**
-     * @brief retuen decreasd object based on self
+     * @brief return decreased object based on self
      */
-    inline Angle subed(const ns_angle::Degree &deg) const {
+    [[nodiscard]] inline Angle subed(const ns_angle::Degree &deg) const {
       auto copy = *this;
       copy.sub(deg);
       return copy;
     }
     /**
-     * @brief retuen decreasd object based on self
+     * @brief return decreased object based on self
      */
-    inline Angle subed(const ns_angle::Radian &rad) const {
+    [[nodiscard]] inline Angle subed(const ns_angle::Radian &rad) const {
       auto copy = *this;
       copy.sub(rad);
       return copy;
     }
     /**
-     * @brief retuen decreasd object based on self
+     * @brief return decreased object based on self
      */
-    inline Angle subed(int deg, int min = 0, long double sed = 0.0) const {
-      auto copy = *this;
-      copy.sub(deg, min, sed);
-      return copy;
-    }
-    /**
-     * @brief retuen decreasd object based on self
-     */
-    inline Angle subed(const Angle &angle) const {
+    [[nodiscard]] inline Angle subed(const Angle &angle) const {
       return this->subed(angle.radian());
     }
 
+  public:
+    inline Angle &operator*=(long double factor) {
+      return this->mul(factor);
+    }
+    // don't overload the operator '*' becase it will cause conflicts during type conversion
+    inline Angle muled(long double factor) const {
+      auto copy = *this;
+      copy.mul(factor);
+      return copy;
+    }
+
+  protected:
+    inline Angle &mul(long double factor) {
+      this->_radVal *= factor;
+      return *this;
+    }
+
+  public:
+    inline Angle &operator/=(long double factor) {
+      return this->div(factor);
+    }
+    // don't overload the operator '/' becase it will cause conflicts during type conversion
+    inline Angle dived(long double factor) const {
+      auto copy = *this;
+      copy.div(factor);
+      return copy;
+    }
+
+  protected:
+    inline Angle &div(long double factor) {
+      this->_radVal /= factor;
+      return *this;
+    }
+
+  public:
     /**
      * @brief format the angle to d'm's"
      * @return std::string
      */
-    inline std::string to_string(std::size_t prec = 1) const {
+    [[nodiscard]] inline std::string to_string(int precision = 1) const {
       auto deg = ns_priv::radian2Degree(this->_radVal);
 
       auto [d, _d] = ns_priv::frac(deg);
@@ -354,7 +417,7 @@ namespace ns_angle {
       s = std::abs(s);
 
       std::stringstream stream;
-      stream << std::fixed << std::setprecision(prec);
+      stream << std::fixed << std::setprecision(precision);
       stream << (this->_radVal < 0.0 ? '-' : '+');
       stream << std::to_string(d) << '\'';
       stream << std::to_string(m) << '\'';
@@ -362,7 +425,7 @@ namespace ns_angle {
       return stream.str();
     }
 
-  private:
+  public:
     Angle() = delete;
   };
 
