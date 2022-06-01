@@ -19,17 +19,17 @@ _|    _|  _|    _|  _|    _|  _|  _|
 
 ## 1. Using Example
 
-<img src="./docs/code.png">
+<img src="./docs/code.png" width=80%>
 
 ## 2. Main Classes
 
-### 1) ___Degree___ class
+### 2.1 ___Degree___ class
 
 
 
 just used to create angle object
 
-+ ___ns_angle::Degree operator""_deg(long double deg)___
++ ___ns_angle::Degree operator""_deg(long double deg)__
 
 + ___std::ostream& operator<<(std::ostream& os, const Degree& degree)___
 ```cpp
@@ -37,11 +37,11 @@ just used to create angle object
  * @brief output the Degree object
  */
 ```
-### 2) ___Radian___ class
+### 2.2 ___Radian___ class
 
 just used to create angle object
 
-+ ___ns_angle::Radian operator""_rad(long double rad)___
++ ___ns_angle::Radian operator""_rad(long double rad)__
 
 + ___std::ostream& operator<<(std::ostream& os, const Radian& radian)___
 ```cpp
@@ -50,7 +50,7 @@ just used to create angle object
  */
 ```
 
-### 3) ___Angle___ class
+### 2.3 ___Angle___ class
 
 ___Angle___ class is used to calculate angles. The following is an introduction to some important class member functions.  
 
@@ -64,15 +64,6 @@ ___Angle___ class is used to calculate angles. The following is an introduction 
 ```cpp
   /**
    * @brief Construct a new Angle object using radian
-   */
-```
-+ ___Angle(int deg, int min = 0, long double sed = 0.0)___
-```cpp
-  /**
-   * @brief Construct a new Angle object using d'm's"
-   *
-   * @attention positive angle [+30'12'15.0"] equals to Angle(30, 12, 15.0)
-   * @attention negative angle [-14'24'46.0"] equals to Angle(-14, -24, -46.0)
    */
 ```
 + ___static Angle make_pangle(int deg, int min = 0, long double sed = 0.0)___
@@ -128,26 +119,18 @@ ___Angle___ class is used to calculate angles. The following is an introduction 
    */
 ```
 
-+ ___Angle& add(const ns_angle::Degree& deg)___
-
-+ ___Angle& add(const ns_angle::Radian& rad)___
-
-+ ___Angle& add(int deg, int min = 0, long double sed = 0.0)___
-
-+ ___Angle& add(const Angle& angle)___
++ ___inline Angle &operator+=(const ns_angle::Degree &deg)___
++ ___inline Angle &operator+=(const ns_angle::Radian &rad)___
++ ___inline Angle &operator+=(const Angle &angle)___
 ```cpp
   /**
    * @brief Self increasing
    */
 ```
 
-+ ___Angle added(const ns_angle::Degree& deg) const___
-
-+ ___Angle added(const ns_angle::Radian& rad) const___
-
-+ ___Angle added(int deg, int min = 0, long double sed = 0.0) const___
-
-+ ___Angle added(const Angle& angle) const___
++ ___inline Angle operator+(const ns_angle::Degree &deg) const___
++ ___inline Angle operator+(const ns_angle::Radian &rad) const___
++ ___inline Angle operator+(const Angle &angle) const___
 
 ```cpp
   /**
@@ -155,13 +138,12 @@ ___Angle___ class is used to calculate angles. The following is an introduction 
    */
 ```
 
-+ ___Angle& sub(const ns_angle::Degree& deg)___
++ ___inline Angle &operator-=(const ns_angle::Degree &deg)___
 
-+ ___Angle& sub(const ns_angle::Radian& rad)___
++ ___inline Angle &operator-=(const ns_angle::Radian &rad)___
 
-+ ___Angle& sub(int deg, int min = 0, long double sed = 0.0)___
++ ___inline Angle &operator-=(const Angle &angle)___
 
-+ ___Angle& sub(const Angle& angle)___
 
 ```cpp
   /**
@@ -169,13 +151,9 @@ ___Angle___ class is used to calculate angles. The following is an introduction 
    */
 ```
 
-+ ___Angle subed(const ns_angle::Degree& deg) const___
-
-+ ___Angle subed(const ns_angle::Radian& rad) const___
-
-+ ___Angle subed(int deg, int min = 0, long double sed = 0.0) const___
-
-+ ___Angle subed(const Angle& angle) const___
++ ___inline Angle operator-(const ns_angle::Degree &deg) const___ 
++ ___inline Angle operator-(const ns_angle::Radian &rad) const___
++ ___inline Angle operator-(const Angle &angle) const___
 
 ```cpp
   /**
@@ -197,3 +175,18 @@ ___Angle___ class is used to calculate angles. The following is an introduction 
  * @brief output the angle object
  */
 ```
+
++ ___inline Angle &operator*=(long double factor)___
++ ***inline Angle muled(long double factor) const***
+
+```cpp
+// don't overload the operator '*' becase it will cause conflicts during type conversion
+```
+
++ ___inline Angle &operator/=(long double factor)___
++ ***inline Angle dived(long double factor) const***
+
+```cpp
+// don't overload the operator '/' becase it will cause conflicts during type conversion
+```
+

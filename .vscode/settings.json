@@ -1,5 +1,6 @@
 {
     "files.associations": {
+        "*.cs": "csharp",
         "cctype": "cpp",
         "clocale": "cpp",
         "cmath": "cpp",
@@ -61,6 +62,7 @@
         "cfenv": "cpp",
         "list": "cpp",
         "typeindex": "cpp",
-        "variant": "cpp"
+        "variant": "cpp",
+        "unordered_set": "cpp"
     }
 }
